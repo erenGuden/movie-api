@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     const fetchMovies = async () => {
       const result = await axios(url);
-      setMovies(result.data.results);
+      setMovies([result.data.results[1]]);
       setIsLoading(false);
       console.log(result.data.results);
     };
@@ -22,13 +22,11 @@ function App() {
 
   return (
     <div className="container">
-      <div className="grid">
         <Header />
         {movies.map((movieReq) => (
           <MovieBox key={movieReq.id} movie={movieReq} />
         ))}
       </div>
-    </div>
   );
 }
 
