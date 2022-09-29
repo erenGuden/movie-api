@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./Header";
 import axios from "axios";
 import MovieBox from "./MovieBox";
+import MovieGrid from './MovieGrid'
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -13,7 +14,7 @@ function App() {
   useEffect(() => {
     const fetchMovies = async () => {
       const result = await axios(url);
-      setMovies([result.data.results[1]]);
+      setMovies(result.data.results);
       setIsLoading(false);
       console.log(result.data.results);
     };
@@ -23,9 +24,7 @@ function App() {
   return (
     <div className="container">
         <Header />
-        {movies.map((movieReq) => (
-          <MovieBox key={movieReq.id} movie={movieReq} />
-        ))}
+        <MovieGrid movies={movies} />
       </div>
   );
 }
