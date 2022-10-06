@@ -10,7 +10,7 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
- 
+  const totalPages = 500
   const apiKey = "44c327a909613dc46bc70a8c7e59ea18";
 
   useEffect(() => {
@@ -18,7 +18,8 @@ function App() {
     const fetchMovies = async () => {
       const result = await axios(url);
       setMovies(result.data.results);
-      console.log(result);
+      // console.log(result);
+      // console.log(result.data.total_pages)
     };
     fetchMovies();
   }, [currentPage]);
@@ -34,17 +35,14 @@ function App() {
     searchMovies();
   }, [query]);
 
-  const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
+  const handlePageChange = (pageNumber = totalPages) => setCurrentPage(pageNumber);
 
   return (
     <div className="container">
       <Header />
       <Search getQuery={(q) => setQuery(q)} />
       <MovieGrid movies={movies} />
-      <Pagination
-        currentPage={currentPage}
-        onClick={handlePageChange}
-      />
+      <Pagination currentPage={currentPage} onClick={handlePageChange}/>
     </div>
   );
 }
