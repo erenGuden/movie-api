@@ -18,8 +18,6 @@ function App() {
     const fetchMovies = async () => {
       const result = await axios(url);
       setMovies(result.data.results);
-      // console.log(result);
-      // console.log(result.data.total_pages)
     };
     fetchMovies();
   }, [currentPage]);
@@ -30,7 +28,6 @@ function App() {
       if (!query) return;
       const searchResult = await axios(searchUrl + query);
       setMovies(searchResult.data.results);
-      console.log(searchResult.data.results);
     };
     searchMovies();
   }, [query]);
@@ -38,11 +35,13 @@ function App() {
   const handlePageChange = (pageNumber = totalPages) => setCurrentPage(pageNumber);
 
   return (
-    <div className="container">
-      <Header />
-      <Search getQuery={(q) => setQuery(q)} />
-      <MovieGrid movies={movies} />
-      <Pagination currentPage={currentPage} onClick={handlePageChange}/>
+    <div className="main-class">
+      <div className="container-class">
+        <Header />
+        <Search getQuery={(q) => setQuery(q)} />
+        <MovieGrid movies={movies} />
+        <Pagination currentPage={currentPage} onClick={handlePageChange}/>
+      </div>
     </div>
   );
 }
