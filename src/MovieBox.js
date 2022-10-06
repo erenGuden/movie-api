@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Modal from "./Modal";
+// import Modal from "./Modal";
 
 const IMG = "https://image.tmdb.org/t/p/w500";
 const MovieBox = ({ movie }) => {
