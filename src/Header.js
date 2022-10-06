@@ -3,7 +3,7 @@ import img from './img.svg';
 
 const Header = () => {
   return (
-    <header className='container-logo'>
+    <header>
         <img src={img} alt="" />
     </header>
   )
