@@ -1,11 +1,8 @@
-import React, { useState } from "react";
-// import Modal from "./Modal";
+import React from "react";
+import Modal from "./Modal";
 
 const IMG = "https://image.tmdb.org/t/p/w500";
 const MovieBox = ({ movie }) => {
-const [show, setShow] = useState(false);
-const toggleModal = () => setShow(!show);
-
   return (
     <div className="card-class">
       <div className="card-inner-class">
@@ -26,6 +23,7 @@ const toggleModal = () => setShow(!show);
               <strong>Score:</strong> {movie.vote_average}
             </li>
           </ul>
+          <Modal movie={movie }/>
         </div>
       </div>
     </div>
