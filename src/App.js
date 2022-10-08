@@ -5,6 +5,7 @@ import axios from "axios";
 import MovieGrid from "./MovieGrid";
 import Search from "./Search";
 import Pagination from "./Pagination";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [movies, setMovies] = useState([]);
