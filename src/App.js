@@ -15,30 +15,27 @@ function App() {
   const apiKey = "44c327a909613dc46bc70a8c7e59ea18";
 
   useEffect(() => {
-    getPopularMovies();
-  }, [currentPage]);
+    query
+      ? getSearchedMovie()
+      : getPopularMovies();
+  }, [currentPage, query]);
 
-  useEffect(() => {
-    const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=`;
-    const searchMovies = async () => {
-      if (!query) return getPopularMovies();
-      const searchResult = await axios(searchUrl + query);
-      setMovies(searchResult.data.results);
-    };
-    searchMovies();
-  }, [query]);
+  const getSearchedMovie = async () => {
+    const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}&page=${currentPage}`;
+    const searchResult = await axios(searchUrl);
+    setMovies(searchResult.data.results);
+  }
 
-  const getPopularMovies = () => {
+  const getPopularMovies = async () => {
     const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&query&page=${currentPage}`;
-    const fetchMovies = async () => {
-      const result = await axios(url);
-      setMovies(result.data.results);
-    };
-    fetchMovies();
+    const result = await axios(url);
+    setMovies(result.data.results);
   };
 
-  const handlePageChange = (pageNumber = totalPages) =>
+  const handlePageChange = (e, pageNumber = totalPages) => {
+    e.preventDefault();
     setCurrentPage(pageNumber);
+  }
 
   return (
     <div className="main-class">
