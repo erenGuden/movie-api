@@ -18,6 +18,9 @@ a {
 
 .main-class {
   background: black;
+  padding: 100px;
+  color: white;
+  font-size: medium;
 }
 
 .container-class {
@@ -25,17 +28,6 @@ a {
   margin: auto;
   padding: 0 20px;
 }
-
-/* .btn {
-  display: inline-block;
-  color: #fff;
-  background-color: #3fb573;
-  font-size: 1em;
-  text-align: center;
-  padding: 10px 15px;
-  border: 0;
-  margin: 10px 0;
-} */
 
 header {
   height: 300px;
@@ -72,6 +64,7 @@ input[type="text"] {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
+  background: black; 
 }
 
 .card-class {
@@ -79,6 +72,13 @@ input[type="text"] {
   background-color: transparent;
   height: 300px;
   perspective: 1000px;
+}
+
+.result-class{
+  height: 300px;
+  margin-left: 400px;
+  font-size: xx-large;
+  width: 100%;
 }
 
 .card-class h1 {
@@ -135,6 +135,7 @@ input[type="text"] {
 
 .pagination-class li {
   display:flex;
+  margin-left: 370px;
   padding: 8px 16px;
   float: left;
 }
