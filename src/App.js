@@ -9,25 +9,27 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [movies, setMovies] = useState([]);
-  const [query, setQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 500;
+  const [query, setQuery] = useState("");
+  const [totalPages, setTotalPages] = useState();
   const apiKey = "44c327a909613dc46bc70a8c7e59ea18";
 
   useEffect(() => {
-    query
-      ? getSearchedMovie()
+    setCurrentPage(1);
+    query 
+      ? getSearchedMovie() 
       : getPopularMovies();
-  }, [currentPage, query]);
+  }, [query]);
 
-  const getSearchedMovie = async () => {
-    const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}&page=${currentPage}`;
+  const getSearchedMovie = async (page = 1) => {
+    const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}&page=${page}`;
     const searchResult = await axios(searchUrl);
     setMovies(searchResult.data.results);
-  }
+    setTotalPages(searchResult.data.total_pages);
+  };
 
-  const getPopularMovies = async () => {
-    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&query&page=${currentPage}`;
+  const getPopularMovies = async (page = 1) => {
+    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&query&page=${page}`;
     const result = await axios(url);
     setMovies(result.data.results);
   };
@@ -35,13 +37,16 @@ function App() {
   const handlePageChange = (e, pageNumber = totalPages) => {
     e.preventDefault();
     setCurrentPage(pageNumber);
-  }
+    query 
+      ? getSearchedMovie(pageNumber) 
+      : getPopularMovies(pageNumber);
+  };
 
   return (
     <div className="main-class">
       <div className="container-class">
         <Header />
-        <Search getQuery={(q) => setQuery(q)} />
+        <Search getQuery={setQuery} />
         <MovieGrid movies={movies} />
         <Pagination currentPage={currentPage} onClick={handlePageChange} />
       </div>
