@@ -10,7 +10,7 @@ const MovieBox = ({ movie }) => {
           <img src={IMG + movie.poster_path} alt="" />
         </div>
         <div className="card-back-class">
-          <h1>{movie.title}</h1>
+        <h1 style={{ fontSize: movie.title.length > 45 ? '15px' : '20px'  }}>{movie.title}</h1>
           <ul style={{ padding: '0px' }}>
             <li>
               <strong>Release date:</strong> {movie.release_date}
